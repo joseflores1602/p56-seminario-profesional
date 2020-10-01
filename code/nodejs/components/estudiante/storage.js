@@ -1,37 +1,38 @@
 const model = require('./model')
 
-function addCarrera( objeto ) {
-    const carrera = new model( objeto )
-    carrera.save()
+function addEstudiante( objeto ) {
+    const estudiante = new model( objeto )
+    estudiante.save()
 }
 
-async function getCarreras( filtroCarrera ) {
-    let filtro = {}
-    if (filtroCarrera != null) {
-        filtro = { nombre : filtroCarrera }
+async function getEstudiantes( filtro ) {
+    let filtroMongo = {}
+    if (filtro != null) {
+        filtroMongo = { nombre : filtro }
     }
-    const carreraList = await model.find( filtro )
-    return carreraList
+    const estudianteList = await model.find( filtro )
+    return estudianteList
 }
 
-async function updateCarrera( idCarrera, objeto ) {
-    const foundCarrera = await model.findOne({ _id: idCarrera })
+async function updateEstudiante( id, objeto ) {
+    const foundEstudiante = await model.findOne({ _id: id })
 
-    foundCarrera.nombre = objeto.nombre
-    foundCarrera.abreviatura = objeto.abreviatura
-    foundCarrera.descripcion = objeto.descripcion
+    foundEstudiante.nombre = objeto.nombre
+    foundEstudiante.apellido = objeto.apellido
+    foundEstudiante.correo = objeto.correo
+    foundEstudiante.carrera = objeto.carrera
 
-    const result = await foundCarrera.save()
+    const result = await foundEstudiante.save()
     return result
 }
 
-function deleteCarrera(idCarrera) {
-    return model.deleteOne({ _id: idCarrera })
+function deleteEstudiante(id) {
+    return model.deleteOne({ _id: id })
 }
 
 module.exports = {
-    add: addCarrera,
-    get: getCarreras,
-    update: updateCarrera,
-    delete: deleteCarrera,
+    add: addEstudiante,
+    get: getEstudiantes,
+    update: updateEstudiante,
+    delete: deleteEstudiante,
 }

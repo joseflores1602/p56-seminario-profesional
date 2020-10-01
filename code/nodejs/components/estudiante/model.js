@@ -6,12 +6,16 @@ const mySchema = new schema({
         type: String,
         required: true,
     },
-    abreviatura: {
+    apellido: {
         type: String,
         required: true,
     },
-    descripcion: String,
+    correo: {
+        type: String,
+        required: true,
+    },
+    carrera: String,
 })
 
-const model = mongoose.model( 'Carrera', mySchema )
+const model = mongoose.model( 'Estudiante', mySchema )
 module.exports = model

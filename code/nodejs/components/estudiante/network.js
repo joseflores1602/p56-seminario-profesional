@@ -5,8 +5,8 @@ const controller = require('./controller')
 const router = express.Router()
 
 router.get('/', function(req, res) {
-    const filtroCarrera = req.query.carrera || null
-    controller.getCarreras( filtroCarrera )
+    const filtro = req.query.estudiante || null
+    controller.getEstudiantes( filtro )
         .then((data) => {
             response.success( req, res, data, 200 )
         })
@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 })
 
 router.post('/', function(req, res) {
-    controller.addCarrera( req.body.nombre, req.body.abreviatura, req.body.descripcion )
+    controller.addEstudiante( req.body.nombre, req.body.apellido, req.body.correo, req.body.carrera )
         .then((data) => {
             response.success( req, res, data, 201 )        
         })
@@ -26,7 +26,7 @@ router.post('/', function(req, res) {
 })
 
 router.patch('/', function(req, res) {
-    controller.updateCarrera( req.body.id_carrera, req.body.nombre, req.body.abreviatura, req.body.descripcion )
+    controller.updateEstudiante( req.body.id, req.body.nombre, req.body.apellido, req.body.correo, req.body.carrera )
         .then((data) => {
             response.success( req, res, data, 201 )        
         })
@@ -36,7 +36,7 @@ router.patch('/', function(req, res) {
 })
 
 router.delete('/', function(req, res) {
-    controller.deleteCarrera( req.body.id_carrera )
+    controller.deleteEstudiante( req.body.id )
         .then((data) => {
             response.success( req, res, data, 201 )        
         })

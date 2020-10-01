@@ -1,46 +1,48 @@
 const storage = require('./storage')
 
-function addCarrera(nombre, abreviatura, descripcion) {
+function addEstudiante(nombre, apellido, correo, carrera) {
     return new Promise((resolve, reject) => {
-        let carrera = {
+        let estudiante = {
             nombre: nombre,
-            abreviatura: abreviatura,
-            descripcion: descripcion,
+            apellido: apellido,
+            correo: correo,
+            carrera: carrera
         }
-        storage.add( carrera )
-        resolve( carrera )
+        storage.add( estudiante )
+        resolve( estudiante )
     })
 }
 
-function getCarreras( filtroCarrera ) {
+function getEstudiantes( filtro ) {
     return new Promise( (resolve, reject) => {
-        resolve( storage.get( filtroCarrera ) )
+        resolve( storage.get( filtro ) )
     } )
 }
 
-function updateCarrera(idCarrera, nombre, abreviatura, descripcion) {
+function updateEstudiante(id, nombre, apellido, correo, carrera) {
     return new Promise( async (resolve, reject) => {
-        let carrera = {
+        let estudiante = {
             nombre: nombre,
-            abreviatura: abreviatura,
-            descripcion: descripcion,
+            apellido: apellido,
+            correo: correo,
+            carrera: carrera
         }
-        const result = await storage.update(idCarrera, carrera)
+        const result = await storage.update(id, estudiante)
         resolve( result )
     })
 }
 
-function deleteCarrera(idCarrera) {
+function deleteEstudiante(id) {
     return new Promise((resolve, reject) => {
-        storage.delete( idCarrera )
+        storage.delete( id )
             .then(() => { resolve() })
             .catch((error) => { reject( error ) })
     })
 }
 
 module.exports = {
-    addCarrera,
-    getCarreras,
-    updateCarrera,
-    deleteCarrera,
+    addEstudiante,
+    getEstudiantes,
+    updateEstudiante,
+    deleteEstudiante,
 }
